@@ -1,30 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: backend
   namespace: study-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: frontend
+      component: backend
   template:
     metadata:
       labels:
-        component: frontend
+        component: backend
     spec:
       containers:
-        - name: frontend
-          image: frontend:latest
+        - name: backend
+          image: ghcr.io/thomaspretat/study-app-api:latest
           ports:
-            - containerPort: 22111
-          env:
-            - name: API_URL
-              value: "http://backend:22112"
+            - containerPort: 22112
           resources:
             limits:
               memory: "512Mi"
             requests:
               cpu: "100m"
               memory: "128Mi"
-
